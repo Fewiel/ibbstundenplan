@@ -12,8 +12,8 @@ namespace USIT2020Stundenpläne
         private bool _autostart;
         private bool _autoupdate = true;
         private bool _notification;
-        private List<string> _letztenotify = new List<string>();
-        private List<string> _kurse = new List<string>();
+        private readonly List<string> _letztenotify = new List<string>();
+        private readonly List<string> _kurse = new List<string>();
 
         public IReadOnlyList<string> Kurse => _kurse;
         public IReadOnlyList<string> LetzteNotify => _letztenotify;
@@ -44,7 +44,7 @@ namespace USIT2020Stundenpläne
             }
         }
 
-        public bool Autostart 
+        public bool Autostart
         {
             get => _autostart;
             set
@@ -56,7 +56,6 @@ namespace USIT2020Stundenpläne
                 }
             }
         }
-        
 
         [JsonIgnore]
         public string Path { get; set; }
@@ -92,6 +91,7 @@ namespace USIT2020Stundenpläne
             _kurse.Remove(kurs);
             Save();
         }
+
         public void AddNotify(string notify)
         {
             if (_letztenotify.Contains(notify))

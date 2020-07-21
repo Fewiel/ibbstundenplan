@@ -20,18 +20,18 @@ using System.Windows.Forms;
 
 namespace USIT2020Stundenpläne
 {
-    public partial class frmMain : Form
+    public partial class FrmMain : Form
     {
         public Settings Settings { get; set; }
 
-        private string Version = "1.1.0";
+        private readonly string Version = "1.1.0";
 
-        public frmMain()
+        public FrmMain()
         {
             InitializeComponent();
         }
 
-        private void frmMain_Load(object sender, EventArgs e)
+        private void FrmMain_Load(object sender, EventArgs e)
         {
             if (!Directory.Exists("Stundenpläne"))
                 Directory.CreateDirectory("Stundenpläne");
@@ -48,7 +48,7 @@ namespace USIT2020Stundenpläne
             notifyIcon1.Visible = false;
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
+        private void BtnAdd_Click(object sender, EventArgs e)
         {
             var kurs = tbAdd.Text;
             Regex rgx = new Regex("abKW[0-9]{1,2}.pdf$");
@@ -60,7 +60,7 @@ namespace USIT2020Stundenpläne
             }
         }
 
-        private void btnRemove_Click(object sender, EventArgs e)
+        private void BtnRemove_Click(object sender, EventArgs e)
         {
             if (lbKurse.SelectedItem == null)
                 return;
@@ -75,9 +75,8 @@ namespace USIT2020Stundenpläne
             lbKurse.Items.AddRange(Settings.Kurse.ToArray());
         }
 
-
         private void UpdateStundenpläne()
-        {               
+        {
             var kw0 = CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(DateTime.Now.AddDays(-14), CalendarWeekRule.FirstDay, DayOfWeek.Monday);
             var kw1 = CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(DateTime.Now.AddDays(-7), CalendarWeekRule.FirstDay, DayOfWeek.Monday);
             var kw2 = CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(DateTime.Now, CalendarWeekRule.FirstDay, DayOfWeek.Monday);
@@ -90,24 +89,25 @@ namespace USIT2020Stundenpläne
                 {
                     var url1 = "https://us.ibb.com/umschueler/daten/" + stundenplan + "_abKW" + kw0 + ".pdf";
                     DownloadStundenplan(url1, stundenplan + "_abKW" + kw0 + ".pdf");
-                }           
+                }
+
                 if (!File.Exists(Path.Combine("Sundenpläne", stundenplan + "_abKW" + kw1 + ".pdf")))
                 {
                     var url2 = "https://us.ibb.com/umschueler/daten/" + stundenplan + "_abKW" + kw1 + ".pdf";
                     DownloadStundenplan(url2, stundenplan + "_abKW" + kw1 + ".pdf");
-                }                
+                }
 
                 var url3 = "https://us.ibb.com/umschueler/daten/" + stundenplan + "_abKW" + kw2 + ".pdf";
                 var url4 = "https://us.ibb.com/umschueler/daten/" + stundenplan + "_abKW" + kw3 + ".pdf";
-                                
+
                 DownloadStundenplan(url3, stundenplan + "_abKW" + kw2 + ".pdf");
                 DownloadStundenplan(url4, stundenplan + "_abKW" + kw3 + ".pdf");
             }
         }
 
-        static readonly HttpClient client = new HttpClient();
+        private static readonly HttpClient client = new HttpClient();
 
-        private void DownloadStundenplan(string url, string fileName, bool check = false)
+        private void DownloadStundenplan(string url, string fileName/*, bool check = false*/) //TODO: Nur den aktuellen Prüfen
         {
             client.GetAsync(url).ContinueWith(t =>
             {
@@ -148,17 +148,15 @@ namespace USIT2020Stundenpläne
                     catch (Exception)
                     {
                         return;
-                    }                    
+                    }
 
                     if (!lbSp.Items.Contains(fileName))
                         lbSp.Items.Add(fileName);
-
                 }, TaskScheduler.FromCurrentSynchronizationContext());
-
             }, TaskScheduler.FromCurrentSynchronizationContext());
         }
 
-        static string CalculateMD5(string filename)
+        private static string CalculateMD5(string filename)
         {
             using var md5 = MD5.Create();
             using var stream = File.OpenRead(filename);
@@ -167,7 +165,7 @@ namespace USIT2020Stundenpläne
             return BitConverter.ToString(hash).Replace("-", "").ToLowerInvariant();
         }
 
-        private void btnShow_Click(object sender, EventArgs e)
+        private void BtnShow_Click(object sender, EventArgs e)
         {
             if (lbSp.SelectedItem == null)
                 return;
@@ -183,13 +181,13 @@ namespace USIT2020Stundenpläne
             p.Start();
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void Timer1_Tick(object sender, EventArgs e)
         {
             UpdateStundenpläne();
             CheckforUpdates();
         }
 
-        private void timer2_Tick(object sender, EventArgs e)
+        private void Timer2_Tick(object sender, EventArgs e)
         {
             var kwNeu = CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(DateTime.Now.AddDays(7), CalendarWeekRule.FirstDay, DayOfWeek.Monday);
             foreach (var k in Settings.Kurse)
@@ -223,34 +221,34 @@ namespace USIT2020Stundenpläne
                         MessageBox.Show("Update verfügbar!");
                         btnUpdate.Visible = true;
                     }
-                        
                 }, TaskScheduler.FromCurrentSynchronizationContext());
-
             }, TaskScheduler.FromCurrentSynchronizationContext());
         }
 
-        private void frmMain_Resize(object sender, EventArgs e)
+        private void FrmMain_Resize(object sender, EventArgs e)
         {
-            if (this.WindowState == FormWindowState.Minimized)
+            if (WindowState == FormWindowState.Minimized)
             {
                 Hide();
                 notifyIcon1.Visible = true;
             }
         }
 
-        private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void NotifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             Show();
-            this.WindowState = FormWindowState.Normal;
+            WindowState = FormWindowState.Normal;
             notifyIcon1.Visible = false;
         }
 
-        private void btnUpdate_Click(object sender, EventArgs e)
+        private void BtnUpdate_Click(object sender, EventArgs e)
         {
-            var p = new Process();
-            p.StartInfo = new ProcessStartInfo(@"https://3d-panther.de/?page_id=1004")
+            var p = new Process
             {
-                UseShellExecute = true
+                StartInfo = new ProcessStartInfo("https://3d-panther.de/?page_id=1004")
+                {
+                    UseShellExecute = true
+                }
             };
             p.Start();
         }
