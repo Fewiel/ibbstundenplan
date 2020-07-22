@@ -213,8 +213,8 @@ namespace USIT2020Stundenpläne
             var kwNeu = CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(DateTime.Now.AddDays(7), CalendarWeekRule.FirstDay, DayOfWeek.Monday);
             foreach (var k in Settings.Kurse)
             {
-                var stundenplan = k.Substring(0, k.LastIndexOf("_"));
-                var neusterStundenplan = stundenplan + "_abKW" + kwNeu + ".pdf";                
+                string stundenplan = k.Substring(0, k.LastIndexOf("_"));
+                string neusterStundenplan = stundenplan + "_abKW" + kwNeu + ".pdf";
                 if (File.Exists(Environment.CurrentDirectory + Path.Combine("/Stundenpläne", neusterStundenplan)) && !Settings.LetzteNotify.Contains(neusterStundenplan))
                 {
                     notifyIcon1.BalloonTipTitle = "Neuer Stundenplan verfügbar!";
