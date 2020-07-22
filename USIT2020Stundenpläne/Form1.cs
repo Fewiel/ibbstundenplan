@@ -25,27 +25,27 @@ namespace USIT2020Stundenpläne
     {
         public Settings Settings { get; set; }
 
-        private readonly string Version = "1.2.1";
+        private readonly string Version = "1.2.2";
 
         public FrmMain()
         {
             InitializeComponent();
             Settings = Settings.Load();
-            if (Settings.Minimiert)          
-                WindowState = FormWindowState.Minimized;            
+            if (Settings.Minimiert)
+                WindowState = FormWindowState.Minimized;
         }
 
         private void FrmMain_Load(object sender, EventArgs e)
         {
             CheckforUpdates();
-            
+
             if (!Directory.Exists("Stundenpläne"))
                 Directory.CreateDirectory("Stundenpläne");
             foreach (var f in Directory.GetFiles("Stundenpläne"))
             {
                 lbSp.Items.Add(Path.GetFileName(f));
             }
-            
+
             cbAutoupdate.Checked = Settings.Autoupdate;
             cboxMinuten.Text = Settings.Aktualisierung.ToString();
             cbAutostart.Checked = Settings.Autostart;
@@ -53,7 +53,7 @@ namespace USIT2020Stundenpläne
             var time = Convert.ToInt32(cboxMinuten.Text) * 60 * 1000;
             timer1.Interval = time;
             if (Settings.Minimiert)
-            {                
+            {
                 notifyIcon1.Visible = true;
                 Hide();
             }
@@ -288,6 +288,7 @@ namespace USIT2020Stundenpläne
 
         private void CbAutostart_CheckedChanged(object sender, EventArgs e)
         {
+#if !DEBUG
             Settings.Autostart = cbAutostart.Checked;
             if (cbAutostart.Checked)
             {
@@ -299,6 +300,7 @@ namespace USIT2020Stundenpläne
                 RegistryKey reg = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
                 reg.DeleteValue("IBB Stundenpläne", false);
             }
+#endif
         }
 
         private void CbMinimiert_CheckedChanged(object sender, EventArgs e)
