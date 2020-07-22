@@ -25,7 +25,7 @@ namespace USIT2020Stundenpläne
     {
         public Settings Settings { get; set; }
 
-        private readonly string Version = "1.1.0";
+        private readonly string Version = "1.2.0";
 
         public FrmMain()
         {
@@ -227,6 +227,7 @@ namespace USIT2020Stundenpläne
 
         private void CheckforUpdates()
         {
+#if !DEBUG
             client.GetAsync("https://3d-panther.de/version.txt").ContinueWith(t =>
             {
                 if (!t.IsCompletedSuccessfully || t.Result.StatusCode != System.Net.HttpStatusCode.OK)
@@ -244,6 +245,7 @@ namespace USIT2020Stundenpläne
                     }
                 }, TaskScheduler.FromCurrentSynchronizationContext());
             }, TaskScheduler.FromCurrentSynchronizationContext());
+#endif
         }
 
         private void FrmMain_Resize(object sender, EventArgs e)
