@@ -30,35 +30,37 @@ namespace USIT2020Stundenpläne
         public FrmMain()
         {
             InitializeComponent();
+            Settings = Settings.Load();
+            if (Settings.Minimiert)          
+                WindowState = FormWindowState.Minimized;            
         }
 
         private void FrmMain_Load(object sender, EventArgs e)
         {
+            CheckforUpdates();
+            
             if (!Directory.Exists("Stundenpläne"))
                 Directory.CreateDirectory("Stundenpläne");
             foreach (var f in Directory.GetFiles("Stundenpläne"))
             {
                 lbSp.Items.Add(Path.GetFileName(f));
             }
-            Settings = Settings.Load();
+            
             cbAutoupdate.Checked = Settings.Autoupdate;
             cboxMinuten.Text = Settings.Aktualisierung.ToString();
             cbAutostart.Checked = Settings.Autostart;
             cbMinimiert.Checked = Settings.Minimiert;
             var time = Convert.ToInt32(cboxMinuten.Text) * 60 * 1000;
             timer1.Interval = time;
-
             if (Settings.Minimiert)
-            {
-                Hide();
-                WindowState = FormWindowState.Minimized;
+            {                
                 notifyIcon1.Visible = true;
+                Hide();
             }
             else
             {
                 notifyIcon1.Visible = false;
             }
-
             UpdateKurse();
             UpdateStundenpläne();
             timer1.Start();

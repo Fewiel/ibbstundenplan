@@ -9,17 +9,34 @@ namespace USIT2020Stundenpläne
 {
     public class Settings
     {
+        [JsonProperty("Autostart")]
         private bool _autostart;
+
+        [JsonProperty("Autoupdate")]
         private bool _autoupdate = true;
+        
+        [JsonProperty("Notification")]
         private bool _notification;
+
+        [JsonProperty("Aktualisierung")]
         private int _aktualisierung = 30;
+
+        [JsonProperty("Minimiert")]
         private bool _minimiert;
+
+        [JsonProperty("LetzteNotify")]
         private readonly List<string> _letztenotify = new List<string>();
+
+        [JsonProperty("Kurse")]
         private readonly List<string> _kurse = new List<string>();
 
+        [JsonIgnore]
         public IReadOnlyList<string> Kurse => _kurse;
+
+        [JsonIgnore]
         public IReadOnlyList<string> LetzteNotify => _letztenotify;
 
+        [JsonIgnore]
         public int Aktualisierung
         {
             get => _aktualisierung;
@@ -32,6 +49,8 @@ namespace USIT2020Stundenpläne
                 }
             }
         }
+
+        [JsonIgnore]
         public bool Minimiert
         {
             get => _minimiert;
@@ -45,6 +64,7 @@ namespace USIT2020Stundenpläne
             }
         }
 
+        [JsonIgnore]
         public bool Autoupdate
         {
             get => _autoupdate;
@@ -58,6 +78,7 @@ namespace USIT2020Stundenpläne
             }
         }
 
+        [JsonIgnore]
         public bool Notification
         {
             get => _notification;
@@ -71,6 +92,7 @@ namespace USIT2020Stundenpläne
             }
         }
 
+        [JsonIgnore]
         public bool Autostart
         {
             get => _autostart;
