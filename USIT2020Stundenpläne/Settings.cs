@@ -12,7 +12,7 @@ namespace USIT2020Stundenpläne
         private bool _autostart;
         private bool _autoupdate = true;
         private bool _notification;
-        private int _aktualisierung;
+        private int _aktualisierung = 30;
         private bool _minimiert;
         private readonly List<string> _letztenotify = new List<string>();
         private readonly List<string> _kurse = new List<string>();

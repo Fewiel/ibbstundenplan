@@ -188,7 +188,7 @@
             this.cbAutoupdate.TabIndex = 8;
             this.cbAutoupdate.Text = "Automatische Aktualisierung";
             this.cbAutoupdate.UseVisualStyleBackColor = true;
-            this.cbAutoupdate.CheckedChanged += new System.EventHandler(this.cbAutoupdate_CheckedChanged);
+            this.cbAutoupdate.CheckedChanged += new System.EventHandler(this.CbAutoupdate_CheckedChanged);
             // 
             // cbAutostart
             // 
@@ -199,7 +199,7 @@
             this.cbAutostart.TabIndex = 9;
             this.cbAutostart.Text = "Autostart";
             this.cbAutostart.UseVisualStyleBackColor = true;
-            this.cbAutostart.CheckedChanged += new System.EventHandler(this.cbAutostart_CheckedChanged);
+            this.cbAutostart.CheckedChanged += new System.EventHandler(this.CbAutostart_CheckedChanged);
             // 
             // cbMinimiert
             // 
@@ -210,7 +210,7 @@
             this.cbMinimiert.TabIndex = 10;
             this.cbMinimiert.Text = "Minimiert Starten";
             this.cbMinimiert.UseVisualStyleBackColor = true;
-            this.cbMinimiert.CheckedChanged += new System.EventHandler(this.cbMinimiert_CheckedChanged);
+            this.cbMinimiert.CheckedChanged += new System.EventHandler(this.CbMinimiert_CheckedChanged);
             // 
             // btnAktualisieren
             // 
@@ -220,7 +220,7 @@
             this.btnAktualisieren.TabIndex = 1;
             this.btnAktualisieren.Text = "Aktualisieren";
             this.btnAktualisieren.UseVisualStyleBackColor = true;
-            this.btnAktualisieren.Click += new System.EventHandler(this.BtnShow_Click);
+            this.btnAktualisieren.Click += new System.EventHandler(this.BtnAktualisieren_Click);
             // 
             // FrmMain
             // 
