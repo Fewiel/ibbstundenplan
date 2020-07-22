@@ -187,8 +187,8 @@ namespace USIT2020Stundenpläne
         {
             if (lbSp.SelectedItem == null)
                 return;
-            var path = Application.StartupPath + "/Stundenpläne/" + lbSp.SelectedItem.ToString();
-
+            var path = Environment.CurrentDirectory + "/Stundenpläne/" + lbSp.SelectedItem.ToString();
+            MessageBox.Show(path);
             var p = new Process
             {
                 StartInfo = new ProcessStartInfo(@path)
@@ -214,8 +214,8 @@ namespace USIT2020Stundenpläne
             foreach (var k in Settings.Kurse)
             {
                 var stundenplan = k.Substring(0, k.LastIndexOf("_"));
-                var neusterStundenplan = stundenplan + "_abKW" + kwNeu + ".pdf";
-                if (File.Exists(Application.StartupPath + Path.Combine("Stundenpläne", neusterStundenplan)) && !Settings.LetzteNotify.Contains(neusterStundenplan))
+                var neusterStundenplan = stundenplan + "_abKW" + kwNeu + ".pdf";                
+                if (File.Exists(Environment.CurrentDirectory + Path.Combine("/Stundenpläne", neusterStundenplan)) && !Settings.LetzteNotify.Contains(neusterStundenplan))
                 {
                     notifyIcon1.BalloonTipTitle = "Neuer Stundenplan verfügbar!";
                     notifyIcon1.BalloonTipText = "Neuer Stundenplan: " + neusterStundenplan;
