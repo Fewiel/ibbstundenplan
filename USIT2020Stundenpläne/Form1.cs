@@ -254,6 +254,10 @@ namespace USIT2020Stundenpläne
             {
                 Hide();
                 notifyIcon1.Visible = true;
+
+                notifyIcon1.BalloonTipTitle = "Läuft im Hintergrund";
+                notifyIcon1.BalloonTipText = "IBB Stundenpläne läuft weiter im Hintergrund.";
+                notifyIcon1.ShowBalloonTip(2000);
             }
         }
 
@@ -274,14 +278,6 @@ namespace USIT2020Stundenpläne
                 }
             };
             p.Start();
-        }
-
-        private void FrmMain_TextChanged(object sender, EventArgs e)
-        {
-            var time = Convert.ToInt32(cboxMinuten.Text) * 60 * 1000;
-            timer1.Interval = time;
-            timer1.Stop();
-            timer1.Start();
         }
 
         private void CbAutoupdate_CheckedChanged(object sender, EventArgs e)
@@ -313,6 +309,14 @@ namespace USIT2020Stundenpläne
         {
             UpdateStundenpläne();
             CheckforUpdates();
+        }
+
+        private void CboxMinuten_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var time = Convert.ToInt32(cboxMinuten.Text) * 60 * 1000;
+            timer1.Interval = time;
+            timer1.Stop();
+            timer1.Start();
         }
     }
 }

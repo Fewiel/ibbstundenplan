@@ -169,6 +169,7 @@
             this.cboxMinuten.Size = new System.Drawing.Size(43, 23);
             this.cboxMinuten.TabIndex = 6;
             this.cboxMinuten.Text = "30";
+            this.cboxMinuten.SelectedIndexChanged += new System.EventHandler(this.CboxMinuten_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -244,7 +245,6 @@
             this.Name = "FrmMain";
             this.Text = "IBB Stundenpläne";
             this.Load += new System.EventHandler(this.FrmMain_Load);
-            this.TextChanged += new System.EventHandler(this.FrmMain_TextChanged);
             this.Resize += new System.EventHandler(this.FrmMain_Resize);
             this.ResumeLayout(false);
             this.PerformLayout();
