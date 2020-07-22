@@ -42,6 +42,12 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.cboxMinuten = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cbAutoupdate = new System.Windows.Forms.CheckBox();
+            this.cbAutostart = new System.Windows.Forms.CheckBox();
+            this.cbMinimiert = new System.Windows.Forms.CheckBox();
+            this.btnAktualisieren = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnAdd
@@ -114,7 +120,7 @@
             // 
             this.panel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel1.BackgroundImage")));
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.panel1.Location = new System.Drawing.Point(465, 258);
+            this.panel1.Location = new System.Drawing.Point(465, 292);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(52, 44);
             this.panel1.TabIndex = 4;
@@ -123,14 +129,14 @@
             // 
             this.panel2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel2.BackgroundImage")));
             this.panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.panel2.Location = new System.Drawing.Point(522, 270);
+            this.panel2.Location = new System.Drawing.Point(522, 304);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(89, 30);
             this.panel2.TabIndex = 4;
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(12, 270);
+            this.btnUpdate.Location = new System.Drawing.Point(312, 306);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(147, 30);
             this.btnUpdate.TabIndex = 5;
@@ -147,9 +153,84 @@
             this.notifyIcon1.Visible = true;
             this.notifyIcon1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.NotifyIcon1_MouseDoubleClick);
             // 
+            // cboxMinuten
+            // 
+            this.cboxMinuten.FormattingEnabled = true;
+            this.cboxMinuten.Items.AddRange(new object[] {
+            "1",
+            "5",
+            "10",
+            "15",
+            "20",
+            "30",
+            "45"});
+            this.cboxMinuten.Location = new System.Drawing.Point(13, 313);
+            this.cboxMinuten.Name = "cboxMinuten";
+            this.cboxMinuten.Size = new System.Drawing.Size(43, 23);
+            this.cboxMinuten.TabIndex = 6;
+            this.cboxMinuten.Text = "30";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(62, 316);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(191, 15);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "Aktualisierungsintervall in Minuten";
+            // 
+            // cbAutoupdate
+            // 
+            this.cbAutoupdate.AutoSize = true;
+            this.cbAutoupdate.Location = new System.Drawing.Point(13, 292);
+            this.cbAutoupdate.Name = "cbAutoupdate";
+            this.cbAutoupdate.Size = new System.Drawing.Size(179, 19);
+            this.cbAutoupdate.TabIndex = 8;
+            this.cbAutoupdate.Text = "Automatische Aktualisierung";
+            this.cbAutoupdate.UseVisualStyleBackColor = true;
+            this.cbAutoupdate.CheckedChanged += new System.EventHandler(this.cbAutoupdate_CheckedChanged);
+            // 
+            // cbAutostart
+            // 
+            this.cbAutostart.AutoSize = true;
+            this.cbAutostart.Location = new System.Drawing.Point(12, 267);
+            this.cbAutostart.Name = "cbAutostart";
+            this.cbAutostart.Size = new System.Drawing.Size(75, 19);
+            this.cbAutostart.TabIndex = 9;
+            this.cbAutostart.Text = "Autostart";
+            this.cbAutostart.UseVisualStyleBackColor = true;
+            this.cbAutostart.CheckedChanged += new System.EventHandler(this.cbAutostart_CheckedChanged);
+            // 
+            // cbMinimiert
+            // 
+            this.cbMinimiert.AutoSize = true;
+            this.cbMinimiert.Location = new System.Drawing.Point(93, 267);
+            this.cbMinimiert.Name = "cbMinimiert";
+            this.cbMinimiert.Size = new System.Drawing.Size(118, 19);
+            this.cbMinimiert.TabIndex = 10;
+            this.cbMinimiert.Text = "Minimiert Starten";
+            this.cbMinimiert.UseVisualStyleBackColor = true;
+            this.cbMinimiert.CheckedChanged += new System.EventHandler(this.cbMinimiert_CheckedChanged);
+            // 
+            // btnAktualisieren
+            // 
+            this.btnAktualisieren.Location = new System.Drawing.Point(13, 113);
+            this.btnAktualisieren.Name = "btnAktualisieren";
+            this.btnAktualisieren.Size = new System.Drawing.Size(99, 23);
+            this.btnAktualisieren.TabIndex = 1;
+            this.btnAktualisieren.Text = "Aktualisieren";
+            this.btnAktualisieren.UseVisualStyleBackColor = true;
+            this.btnAktualisieren.Click += new System.EventHandler(this.BtnShow_Click);
+            // 
             // FrmMain
             // 
-            this.ClientSize = new System.Drawing.Size(623, 311);
+            this.ClientSize = new System.Drawing.Size(623, 342);
+            this.Controls.Add(this.btnAktualisieren);
+            this.Controls.Add(this.cbMinimiert);
+            this.Controls.Add(this.cbAutostart);
+            this.Controls.Add(this.cbAutoupdate);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.cboxMinuten);
             this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -163,6 +244,7 @@
             this.Name = "FrmMain";
             this.Text = "IBB Stundenpläne";
             this.Load += new System.EventHandler(this.FrmMain_Load);
+            this.TextChanged += new System.EventHandler(this.FrmMain_TextChanged);
             this.Resize += new System.EventHandler(this.FrmMain_Resize);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -183,6 +265,12 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
+        private System.Windows.Forms.ComboBox cboxMinuten;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox cbAutoupdate;
+        private System.Windows.Forms.CheckBox cbAutostart;
+        private System.Windows.Forms.CheckBox cbMinimiert;
+        private System.Windows.Forms.Button btnAktualisieren;
     }
 }
 

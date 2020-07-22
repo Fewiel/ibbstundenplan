@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -40,12 +41,28 @@ namespace USIT2020Stundenpläne
                 lbSp.Items.Add(Path.GetFileName(f));
             }
             Settings = Settings.Load();
+            cbAutoupdate.Checked = Settings.Autoupdate;
+            cbAutoupdate.Checked = Settings.Autoupdate;
+            cboxMinuten.Text = Settings.Aktualisierung.ToString();
+            cbAutostart.Checked = Settings.Autostart;
+            cbMinimiert.Checked = Settings.Minimiert;
+
+            if (Settings.Minimiert)
+            {
+                Hide();
+                WindowState = FormWindowState.Minimized;
+                notifyIcon1.Visible = true;
+            }
+            else
+            {
+                notifyIcon1.Visible = false;
+            }
+
             UpdateKurse();
             UpdateStundenpläne();
             timer1.Start();
             timer2.Start();
             CheckforUpdates();
-            notifyIcon1.Visible = false;
         }
 
         private void BtnAdd_Click(object sender, EventArgs e)
@@ -183,8 +200,11 @@ namespace USIT2020Stundenpläne
 
         private void Timer1_Tick(object sender, EventArgs e)
         {
-            UpdateStundenpläne();
-            CheckforUpdates();
+            if (Settings.Autoupdate)
+            {
+                UpdateStundenpläne();
+                CheckforUpdates();
+            }
         }
 
         private void Timer2_Tick(object sender, EventArgs e)
@@ -251,6 +271,39 @@ namespace USIT2020Stundenpläne
                 }
             };
             p.Start();
+        }
+
+        private void FrmMain_TextChanged(object sender, EventArgs e)
+        {
+            var time = Convert.ToInt32(cboxMinuten.Text) * 60 * 1000;
+            timer1.Interval = time;
+            timer1.Stop();
+            timer1.Start();
+        }
+
+        private void cbAutoupdate_CheckedChanged(object sender, EventArgs e)
+        {
+            Settings.Autoupdate = cbAutoupdate.Checked;
+        }
+
+        private void cbAutostart_CheckedChanged(object sender, EventArgs e)
+        {
+            Settings.Autostart = cbAutostart.Checked;
+            if (cbAutostart.Checked)
+            {
+                RegistryKey reg = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+                reg.SetValue("IBB Stundenpläne", Application.ExecutablePath.ToString());
+            }
+            else
+            {
+                RegistryKey reg = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+                reg.DeleteValue("IBB Stundenpläne", false);
+            }
+        }
+
+        private void cbMinimiert_CheckedChanged(object sender, EventArgs e)
+        {
+            Settings.Minimiert = cbMinimiert.Checked;
         }
     }
 }
