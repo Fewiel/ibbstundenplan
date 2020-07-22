@@ -25,7 +25,7 @@ namespace USIT2020Stundenpläne
     {
         public Settings Settings { get; set; }
 
-        private readonly string Version = "1.2.0";
+        private readonly string Version = "1.2.1";
 
         public FrmMain()
         {
@@ -188,7 +188,6 @@ namespace USIT2020Stundenpläne
             if (lbSp.SelectedItem == null)
                 return;
             var path = Environment.CurrentDirectory + "/Stundenpläne/" + lbSp.SelectedItem.ToString();
-            MessageBox.Show(path);
             var p = new Process
             {
                 StartInfo = new ProcessStartInfo(@path)
