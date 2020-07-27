@@ -25,7 +25,7 @@ namespace USIT2020Stundenpläne
     {
         public Settings Settings { get; set; }
 
-        private readonly string Version = "1.2.3";
+        private readonly string Version = "1.3.0";
 
         public FrmMain()
         {
@@ -39,9 +39,9 @@ namespace USIT2020Stundenpläne
         {
             CheckforUpdates();
 
-            if (!Directory.Exists("Stundenpläne"))
-                Directory.CreateDirectory("Stundenpläne");
-            foreach (var f in Directory.GetFiles("Stundenpläne"))
+            if (!Directory.Exists(Environment.CurrentDirectory + "/Stundenpläne"))
+                Directory.CreateDirectory(Environment.CurrentDirectory + "/Stundenpläne");
+            foreach (var f in Directory.GetFiles(Environment.CurrentDirectory + "/Stundenpläne"))
             {
                 lbSp.Items.Add(Path.GetFileName(f));
             }
@@ -105,13 +105,13 @@ namespace USIT2020Stundenpläne
             foreach (var k in Settings.Kurse)
             {
                 var stundenplan = k.Substring(0, k.LastIndexOf("_"));
-                if (!File.Exists(Path.Combine("Stundenpläne", stundenplan + "_abKW" + kw0 + ".pdf")))
+                if (!File.Exists(Environment.CurrentDirectory + Path.Combine("/Stundenpläne", stundenplan + "_abKW" + kw0 + ".pdf")))
                 {
                     var url1 = "https://us.ibb.com/umschueler/daten/" + stundenplan + "_abKW" + kw0 + ".pdf";
                     DownloadStundenplan(url1, stundenplan + "_abKW" + kw0 + ".pdf");
                 }
 
-                if (!File.Exists(Path.Combine("Sundenpläne", stundenplan + "_abKW" + kw1 + ".pdf")))
+                if (!File.Exists(Environment.CurrentDirectory + Path.Combine("/Sundenpläne", stundenplan + "_abKW" + kw1 + ".pdf")))
                 {
                     var url2 = "https://us.ibb.com/umschueler/daten/" + stundenplan + "_abKW" + kw1 + ".pdf";
                     DownloadStundenplan(url2, stundenplan + "_abKW" + kw1 + ".pdf");
@@ -139,12 +139,12 @@ namespace USIT2020Stundenpläne
                     if (!c.IsCompletedSuccessfully)
                         return;
 
-                    if (File.Exists(Path.Combine("Stundenpläne", fileName)))
+                    if (File.Exists(Environment.CurrentDirectory + Path.Combine("/Stundenpläne", fileName)))
                     {
-                        Directory.CreateDirectory("tmp");
-                        File.WriteAllBytes(Path.Combine("tmp", fileName), c.Result);
-                        var f1 = CalculateMD5(Path.Combine("tmp", fileName));
-                        var f2 = CalculateMD5(Path.Combine("Stundenpläne", fileName));
+                        Directory.CreateDirectory(Environment.CurrentDirectory + "/tmp");
+                        File.WriteAllBytes(Environment.CurrentDirectory + Path.Combine("/tmp", fileName), c.Result);
+                        var f1 = CalculateMD5(Environment.CurrentDirectory + Path.Combine("/tmp", fileName));
+                        var f2 = CalculateMD5(Environment.CurrentDirectory + Path.Combine("/Stundenpläne", fileName));
 
                         if (f1 == f2)
                         {
@@ -160,10 +160,10 @@ namespace USIT2020Stundenpläne
                         }
                     }
 
-                    Directory.CreateDirectory("Stundenpläne");
+                    Directory.CreateDirectory(Environment.CurrentDirectory + "/Stundenpläne");
                     try
                     {
-                        File.WriteAllBytes(Path.Combine("Stundenpläne", fileName), c.Result);
+                        File.WriteAllBytes(Environment.CurrentDirectory + Path.Combine("/Stundenpläne", fileName), c.Result);
                     }
                     catch (Exception)
                     {
@@ -229,7 +229,7 @@ namespace USIT2020Stundenpläne
         private void CheckforUpdates()
         {
 #if !DEBUG
-            client.GetAsync("https://3d-panther.de/version.txt").ContinueWith(t =>
+            client.GetAsync("https://update.p-weitkamp.de/ibbstundenplan/version.txt").ContinueWith(t =>
             {
                 if (!t.IsCompletedSuccessfully || t.Result.StatusCode != System.Net.HttpStatusCode.OK)
                     return;
