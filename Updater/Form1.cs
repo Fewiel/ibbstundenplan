@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -29,6 +30,7 @@ namespace Updater
             });
             thread.Start();
         }
+
         void client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
             this.BeginInvoke((MethodInvoker)delegate {
@@ -39,6 +41,7 @@ namespace Updater
                 progressBar1.Value = int.Parse(Math.Truncate(percentage).ToString());
             });
         }
+
         void client_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
         {
             this.BeginInvoke((MethodInvoker)delegate {
@@ -46,6 +49,13 @@ namespace Updater
             });
         }
 
+        private void FrmMain_Load(object sender, EventArgs e)
+        {
+            //if (!File.Exists(Path.Combine(Environment.CurrentDirectory, "IBB Stundenpläne.de")))
+            //{
 
+            //}
+
+        }
     }
 }
