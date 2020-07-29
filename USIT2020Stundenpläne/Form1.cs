@@ -148,12 +148,12 @@ namespace USIT2020Stundenpläne
 
                         if (f1 == f2)
                         {
-                            Directory.Delete("tmp", true);
+                            Directory.Delete(Environment.CurrentDirectory + "/tmp", true);
                             return;
                         }
                         else
                         {
-                            Directory.Delete("tmp", true);
+                            Directory.Delete(Environment.CurrentDirectory + "/tmp", true);
                             notifyIcon1.BalloonTipTitle = "Stundenplan Aktualisiert!";
                             notifyIcon1.BalloonTipText = "Stundenplan Aktualisiert: " + fileName;
                             notifyIcon1.ShowBalloonTip(20000);
