@@ -50,7 +50,7 @@
             this.btnAbort.TabIndex = 1;
             this.btnAbort.Text = "Abbruch";
             this.btnAbort.UseVisualStyleBackColor = true;
-            this.btnAbort.Click += new System.EventHandler(this.btnAbort_Click);
+            this.btnAbort.Click += new System.EventHandler(this.BtnAbort_Click);
             // 
             // btnStart
             // 

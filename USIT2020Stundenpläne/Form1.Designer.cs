@@ -126,7 +126,7 @@
             this.logo3dp.Name = "logo3dp";
             this.logo3dp.Size = new System.Drawing.Size(52, 44);
             this.logo3dp.TabIndex = 4;
-            this.logo3dp.Click += new System.EventHandler(this.logo3dp_Click);
+            this.logo3dp.Click += new System.EventHandler(this.Logo3dp_Click);
             // 
             // panel2
             // 
@@ -235,7 +235,7 @@
             this.logodiscord.Name = "logodiscord";
             this.logodiscord.Size = new System.Drawing.Size(103, 44);
             this.logodiscord.TabIndex = 4;
-            this.logodiscord.Click += new System.EventHandler(this.logodiscord_Click);
+            this.logodiscord.Click += new System.EventHandler(this.Logodiscord_Click);
             // 
             // FrmMain
             // 

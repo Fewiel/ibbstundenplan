@@ -25,7 +25,7 @@ namespace USIT2020Stundenpläne
     {
         public Settings Settings { get; set; }
 
-        private readonly string Version = "1.3.1";
+        private readonly string Version = "1.4.0";
 
         public FrmMain()
         {
@@ -37,6 +37,7 @@ namespace USIT2020Stundenpläne
 
         private void FrmMain_Load(object sender, EventArgs e)
         {
+            Directory.SetCurrentDirectory(Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName));            
             CheckforUpdates();
 
             if (!Directory.Exists(Environment.CurrentDirectory + "/Stundenpläne"))
@@ -269,7 +270,7 @@ namespace USIT2020Stundenpläne
 
         private void BtnUpdate_Click(object sender, EventArgs e)
         {
-            var p = new Process            
+            Process p = new Process
             {
                 StartInfo = new ProcessStartInfo("https://3d-panther.de/?page_id=1004")
                 {
@@ -277,7 +278,7 @@ namespace USIT2020Stundenpläne
                 }
             };
             p.Start();
-            var p2 = new Process
+            Process p2 = new Process
             {
                 StartInfo = new ProcessStartInfo(Path.Combine(Environment.CurrentDirectory + "updater.exe"))
                 {
@@ -300,6 +301,7 @@ namespace USIT2020Stundenpläne
             {
                 RegistryKey reg = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
                 reg.SetValue("IBB Stundenpläne", Path.Combine(Environment.CurrentDirectory, "IBB Stundenpläne.exe"));
+                MessageBox.Show(Path.Combine(Environment.CurrentDirectory, "IBB Stundenpläne.exe"));
             }
             else
             {
@@ -329,7 +331,7 @@ namespace USIT2020Stundenpläne
             timer1.Start();
         }
 
-        private void logodiscord_Click(object sender, EventArgs e)
+        private void Logodiscord_Click(object sender, EventArgs e)
         {
             var p = new Process
             {
@@ -341,7 +343,7 @@ namespace USIT2020Stundenpläne
             p.Start();
         }
 
-        private void logo3dp_Click(object sender, EventArgs e)
+        private void Logo3dp_Click(object sender, EventArgs e)
         {
             var p = new Process
             {
