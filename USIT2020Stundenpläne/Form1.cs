@@ -269,7 +269,7 @@ namespace USIT2020Stundenpläne
 
         private void BtnUpdate_Click(object sender, EventArgs e)
         {
-            var p = new Process
+            var p = new Process            
             {
                 StartInfo = new ProcessStartInfo("https://3d-panther.de/?page_id=1004")
                 {
@@ -277,6 +277,14 @@ namespace USIT2020Stundenpläne
                 }
             };
             p.Start();
+            var p2 = new Process
+            {
+                StartInfo = new ProcessStartInfo(Path.Combine(Environment.CurrentDirectory + "updater.exe"))
+                {
+                    UseShellExecute = true
+                }
+            };
+            p2.Start();
         }
 
         private void CbAutoupdate_CheckedChanged(object sender, EventArgs e)
