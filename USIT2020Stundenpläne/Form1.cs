@@ -25,7 +25,7 @@ namespace USIT2020Stundenpläne
     {
         public Settings Settings { get; set; }
 
-        private readonly string Version = "1.3.0";
+        private readonly string Version = "1.3.1";
 
         public FrmMain()
         {
@@ -228,7 +228,7 @@ namespace USIT2020Stundenpläne
 
         private void CheckforUpdates()
         {
-            client.GetAsync("https://update.p-weitkamp.de/ibbstundenplan/version.txt").ContinueWith(t =>
+            client.GetAsync("http://update.p-weitkamp.de/ibbstundenplan/version.txt").ContinueWith(t =>
             {
                 if (!t.IsCompletedSuccessfully || t.Result.StatusCode != System.Net.HttpStatusCode.OK)
                     return;
@@ -240,7 +240,7 @@ namespace USIT2020Stundenpläne
                     var v = c.Result;
                     if (v != Version + "\n")
                     {
-                        MessageBox.Show("Update verfügbar!");
+                        MessageBox.Show("IBB Stundenpläne - Update verfügbar! - " + v);
                         btnUpdate.Visible = true;
                     }
                 }, TaskScheduler.FromCurrentSynchronizationContext());
@@ -319,6 +319,30 @@ namespace USIT2020Stundenpläne
             timer1.Interval = time;
             timer1.Stop();
             timer1.Start();
+        }
+
+        private void logodiscord_Click(object sender, EventArgs e)
+        {
+            var p = new Process
+            {
+                StartInfo = new ProcessStartInfo("https://discord.gg/cm9k6NH")
+                {
+                    UseShellExecute = true
+                }
+            };
+            p.Start();
+        }
+
+        private void logo3dp_Click(object sender, EventArgs e)
+        {
+            var p = new Process
+            {
+                StartInfo = new ProcessStartInfo("https://3d-panther.de/?page_id=1004")
+                {
+                    UseShellExecute = true
+                }
+            };
+            p.Start();
         }
     }
 }

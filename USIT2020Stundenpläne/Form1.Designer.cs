@@ -38,7 +38,7 @@
             this.tbAdd = new System.Windows.Forms.TextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.logo3dp = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
@@ -48,6 +48,7 @@
             this.cbAutostart = new System.Windows.Forms.CheckBox();
             this.cbMinimiert = new System.Windows.Forms.CheckBox();
             this.btnAktualisieren = new System.Windows.Forms.Button();
+            this.logodiscord = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
             // btnAdd
@@ -116,27 +117,29 @@
             this.timer2.Interval = 5000;
             this.timer2.Tick += new System.EventHandler(this.Timer2_Tick);
             // 
-            // panel1
+            // logo3dp
             // 
-            this.panel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel1.BackgroundImage")));
-            this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.panel1.Location = new System.Drawing.Point(465, 292);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(52, 44);
-            this.panel1.TabIndex = 4;
+            this.logo3dp.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("logo3dp.BackgroundImage")));
+            this.logo3dp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.logo3dp.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.logo3dp.Location = new System.Drawing.Point(454, 292);
+            this.logo3dp.Name = "logo3dp";
+            this.logo3dp.Size = new System.Drawing.Size(52, 44);
+            this.logo3dp.TabIndex = 4;
+            this.logo3dp.Click += new System.EventHandler(this.logo3dp_Click);
             // 
             // panel2
             // 
             this.panel2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel2.BackgroundImage")));
             this.panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.panel2.Location = new System.Drawing.Point(522, 304);
+            this.panel2.Location = new System.Drawing.Point(512, 292);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(89, 30);
+            this.panel2.Size = new System.Drawing.Size(99, 42);
             this.panel2.TabIndex = 4;
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(312, 306);
+            this.btnUpdate.Location = new System.Drawing.Point(464, 242);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(147, 30);
             this.btnUpdate.TabIndex = 5;
@@ -223,9 +226,21 @@
             this.btnAktualisieren.UseVisualStyleBackColor = true;
             this.btnAktualisieren.Click += new System.EventHandler(this.BtnAktualisieren_Click);
             // 
+            // logodiscord
+            // 
+            this.logodiscord.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("logodiscord.BackgroundImage")));
+            this.logodiscord.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.logodiscord.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.logodiscord.Location = new System.Drawing.Point(345, 292);
+            this.logodiscord.Name = "logodiscord";
+            this.logodiscord.Size = new System.Drawing.Size(103, 44);
+            this.logodiscord.TabIndex = 4;
+            this.logodiscord.Click += new System.EventHandler(this.logodiscord_Click);
+            // 
             // FrmMain
             // 
             this.ClientSize = new System.Drawing.Size(623, 342);
+            this.Controls.Add(this.logodiscord);
             this.Controls.Add(this.btnAktualisieren);
             this.Controls.Add(this.cbMinimiert);
             this.Controls.Add(this.cbAutostart);
@@ -234,7 +249,7 @@
             this.Controls.Add(this.cboxMinuten);
             this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.panel2);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.logo3dp);
             this.Controls.Add(this.tbAdd);
             this.Controls.Add(this.btnShow);
             this.Controls.Add(this.lbKurse);
@@ -261,7 +276,7 @@
         private System.Windows.Forms.ListBox lbKurse;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Timer timer2;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel logo3dp;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
@@ -271,6 +286,7 @@
         private System.Windows.Forms.CheckBox cbAutostart;
         private System.Windows.Forms.CheckBox cbMinimiert;
         private System.Windows.Forms.Button btnAktualisieren;
+        private System.Windows.Forms.Panel logodiscord;
     }
 }
 
