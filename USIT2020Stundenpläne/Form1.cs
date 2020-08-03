@@ -228,7 +228,6 @@ namespace USIT2020Stundenpläne
 
         private void CheckforUpdates()
         {
-#if !DEBUG
             client.GetAsync("https://update.p-weitkamp.de/ibbstundenplan/version.txt").ContinueWith(t =>
             {
                 if (!t.IsCompletedSuccessfully || t.Result.StatusCode != System.Net.HttpStatusCode.OK)
@@ -246,7 +245,6 @@ namespace USIT2020Stundenpläne
                     }
                 }, TaskScheduler.FromCurrentSynchronizationContext());
             }, TaskScheduler.FromCurrentSynchronizationContext());
-#endif
         }
 
         private void FrmMain_Resize(object sender, EventArgs e)
@@ -316,6 +314,7 @@ namespace USIT2020Stundenpläne
 
         private void CboxMinuten_SelectedIndexChanged(object sender, EventArgs e)
         {
+            Settings.Aktualisierung = Convert.ToInt32(cboxMinuten.Text);
             var time = Convert.ToInt32(cboxMinuten.Text) * 60 * 1000;
             timer1.Interval = time;
             timer1.Stop();
