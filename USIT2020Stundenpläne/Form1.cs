@@ -37,7 +37,7 @@ namespace USIT2020Stundenpläne
 
         private void FrmMain_Load(object sender, EventArgs e)
         {
-            Directory.SetCurrentDirectory(Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName));            
+            Directory.SetCurrentDirectory(Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName));
             CheckforUpdates();
 
             if (!Directory.Exists(Environment.CurrentDirectory + "/Stundenpläne"))
@@ -127,7 +127,7 @@ namespace USIT2020Stundenpläne
         }
 
         private static readonly HttpClient client = new HttpClient();
-
+        //test
         private void DownloadStundenplan(string url, string fileName/*, bool check = false*/) //TODO: Nur den aktuellen Prüfen
         {
             client.GetAsync(url).ContinueWith(t =>
