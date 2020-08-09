@@ -25,7 +25,7 @@ namespace USIT2020Stundenpläne
     {
         public Settings Settings { get; set; }
 
-        private readonly string Version = "1.4.0";
+        private readonly string Version = "1.3.5";
 
         public FrmMain()
         {
@@ -301,7 +301,6 @@ namespace USIT2020Stundenpläne
             {
                 RegistryKey reg = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
                 reg.SetValue("IBB Stundenpläne", Path.Combine(Environment.CurrentDirectory, "IBB Stundenpläne.exe"));
-                MessageBox.Show(Path.Combine(Environment.CurrentDirectory, "IBB Stundenpläne.exe"));
             }
             else
             {
