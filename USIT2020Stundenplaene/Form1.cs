@@ -30,7 +30,7 @@ namespace USIT2020Stundenpläne
         public FrmMain()
         {
             InitializeComponent();
-            Settings = Settings.Load();
+            Settings = Settings.Load(Path.Combine(Environment.CurrentDirectory, "..", "settings.json"));
             if (Settings.Minimiert)
                 WindowState = FormWindowState.Minimized;
         }
