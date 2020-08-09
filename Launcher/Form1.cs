@@ -25,21 +25,12 @@ namespace Launcher
         {
             Directory.SetCurrentDirectory(Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName));
             InitializeComponent();
-
-            //var updater = new Updater();
-            //var hashes = updater.GenerateHashes(@"C:\Users\pweit\Desktop\USIT2020Stundenpläne\USIT2020Stundenpläne\bin\Release\netcoreapp3.1\publish", blf, bld);
-
-            //foreach (var f in hashes)
-            //{
-            //    Debug.WriteLine(f.Key + " - " + f.Value);
-            //}
-            SetUpdateText("Prüfe Lokale Datein...", 10);
-            Task.Factory.StartNew(Download);
         }
 
         private void SetUpdateText(string txt, int progress)
         {
-            Invoke(new Action(() => {
+            Invoke(new Action(() =>
+            {
                 lblLauncher.Text = txt;
                 pbLauncher.Value = progress;
             }));
@@ -48,14 +39,45 @@ namespace Launcher
         private async Task Download()
         {
             var updater = new Updater();
+            Directory.CreateDirectory(Path.Combine(Environment.CurrentDirectory, "core"));
             var localHashes = Hasher.GenerateHashes(Path.Combine(Environment.CurrentDirectory, "core"), blf, bld);
             SetUpdateText("Frage Updateserver...", 30);
-            var onlineHashes = await updater.DownloadHashesAsync("http://update.p-weitkamp.de/ibbstundenplan/hashes", client).ConfigureAwait(false);
+            var onlineHashes = await updater.
+                DownloadHashesAsync("http://update.p-weitkamp.de/ibbstundenplan/hashes/hashes.json", client).ConfigureAwait(false);
             SetUpdateText("Prüfe auf Updates...", 60);
-            var updates = updater.CompareHashes(localHashes, onlineHashes);
+            var updates = updater.CompareHashes(Path.Combine(Environment.CurrentDirectory, "core"), localHashes, onlineHashes);
             SetUpdateText("Lade Updates herrunter...", 80);
-            await updater.DownloadAsync("http://update.p-weitkamp.de/ibbstundenplan/data", client, updates);
+            await updater.DownloadAsync("http://update.p-weitkamp.de/ibbstundenplan/data/",
+                Path.Combine(Environment.CurrentDirectory, "core"), client, updates).ConfigureAwait(false);
             SetUpdateText("Starte Tool...", 100);
+            Process.Start(Path.Combine(Environment.CurrentDirectory, "core/IBB Stundenpläne.exe"));
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            SetUpdateText("Prüfe Lokale Datein...", 10);
+            Task.Factory.StartNew(Download).ContinueWith(t =>
+            {
+                if (!t.IsCompletedSuccessfully)
+                {
+                    var path = Path.Combine(Environment.CurrentDirectory, "core/IBB Stundenpläne.exe");
+                    if (File.Exists(path))
+                    {
+                        var mbResult = MessageBox.Show("Update fehlgeschlagen. Versuche es später erneut." + Environment.NewLine +
+                            "Willst du das Programm trotzdem Starten? (Es könnte zu Problemen führen)", "Fehler aufgetreten",
+                            MessageBoxButtons.YesNo);
+                        if (mbResult == DialogResult.Yes)
+                            Process.Start(path);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Download fehlgeschlagen, bitte versuche es später erneut." + Environment.NewLine +
+                            "Solltest du Hilfe benötigen Email an: info@p-weitkamp.de");
+                    }
+                }
+
+                Application.Exit();
+            }, TaskScheduler.FromCurrentSynchronizationContext());
         }
     }
 }

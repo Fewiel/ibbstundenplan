@@ -25,7 +25,7 @@ namespace Launcher
         //  - 0. alt löschen
         //  - 1. Welche fehlen
         //  - 2. Unterschiede
-        public Dictionary<string, string> CompareHashes(Dictionary<string, string> localHashes, Dictionary<string, string> onlineHashes)
+        public Dictionary<string, string> CompareHashes(string basePath, Dictionary<string, string> localHashes, Dictionary<string, string> onlineHashes)
         {
             var updates = new Dictionary<string, string>();
 
@@ -33,7 +33,7 @@ namespace Launcher
             {
                 if (!onlineHashes.ContainsKey(kvp.Key))
                 {
-                    File.Delete(Path.Combine(Environment.CurrentDirectory, kvp.Key));
+                    File.Delete(Path.Combine(basePath, kvp.Key));
                 }
             }
 
@@ -49,13 +49,15 @@ namespace Launcher
         }
 
         //neue/aktualisierte runterladen und schreiben/überschreiben
-        public async Task DownloadAsync(string url, HttpClient client, Dictionary<string, string> files)
+        public async Task DownloadAsync(string url, string path, HttpClient client, Dictionary<string, string> files)
         {
             foreach (var f in files.Keys)
             {
                 var response = await client.GetAsync(url + f).ConfigureAwait(false);
                 var data = await response.Content.ReadAsByteArrayAsync().ConfigureAwait(false);
-                await File.WriteAllBytesAsync(Path.Combine(Environment.CurrentDirectory, f), data).ConfigureAwait(false);
+                var fpath = Path.Combine(path, f);
+                Directory.CreateDirectory(Path.GetDirectoryName(fpath));
+                await File.WriteAllBytesAsync(fpath, data).ConfigureAwait(false);
             }
         }
     }
