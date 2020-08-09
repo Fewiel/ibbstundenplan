@@ -123,8 +123,8 @@ namespace USIT2020Stundenpläne
         }
 
         private static readonly HttpClient client = new HttpClient();
-      
-        private void DownloadStundenplan(string url, string fileName/*, bool check = false*/) //TODO: Nur den aktuellen Prüfen
+
+        private void DownloadStundenplan(string url, string fileName)
         {
             client.GetAsync(url).ContinueWith(t =>
             {
