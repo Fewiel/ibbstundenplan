@@ -7,9 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "USIT2020Stundenpläne", "US
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Updater", "Updater\Updater.csproj", "{C3BF4E41-34BD-45EE-BF01-5770820F2697}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Launcher", "Launcher\Launcher.csproj", "{A85AA9B9-99F9-4A06-9ED9-9B8A97608BAB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Launcher", "Launcher\Launcher.csproj", "{A85AA9B9-99F9-4A06-9ED9-9B8A97608BAB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashLib", "HashLib\HashLib.csproj", "{5DE7A7F3-5DA5-433F-A6FC-06A5641FB6DE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HashLib", "HashLib\HashLib.csproj", "{5DE7A7F3-5DA5-433F-A6FC-06A5641FB6DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashCMD", "HashCMD\HashCMD.csproj", "{AD299399-132C-4AD2-A665-C8FEEF00D4DE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{5DE7A7F3-5DA5-433F-A6FC-06A5641FB6DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5DE7A7F3-5DA5-433F-A6FC-06A5641FB6DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5DE7A7F3-5DA5-433F-A6FC-06A5641FB6DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD299399-132C-4AD2-A665-C8FEEF00D4DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD299399-132C-4AD2-A665-C8FEEF00D4DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD299399-132C-4AD2-A665-C8FEEF00D4DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD299399-132C-4AD2-A665-C8FEEF00D4DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

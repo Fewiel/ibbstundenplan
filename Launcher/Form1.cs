@@ -33,26 +33,29 @@ namespace Launcher
             //{
             //    Debug.WriteLine(f.Key + " - " + f.Value);
             //}
-            lblLauncher.Text = "Prüfe auf Lokale Daten...";
-            pbLauncher.Value = 10;
+            SetUpdateText("Prüfe Lokale Datein...", 10);
             Task.Factory.StartNew(Download);
+        }
+
+        private void SetUpdateText(string txt, int progress)
+        {
+            Invoke(new Action(() => {
+                lblLauncher.Text = txt;
+                pbLauncher.Value = progress;
+            }));
         }
 
         private async Task Download()
         {
             var updater = new Updater();
             var localHashes = Hasher.GenerateHashes(Path.Combine(Environment.CurrentDirectory, "core"), blf, bld);
-            lblLauncher.Text = "Frage Updateserver...";
-            pbLauncher.Value = 30;
-            var onlineHashes = await updater.DownloadHashesAsync("", client).ConfigureAwait(false);
-            lblLauncher.Text = "Prüfe auf Updates...";
-            pbLauncher.Value = 60;
+            SetUpdateText("Frage Updateserver...", 30);
+            var onlineHashes = await updater.DownloadHashesAsync("http://update.p-weitkamp.de/ibbstundenplan/hashes", client).ConfigureAwait(false);
+            SetUpdateText("Prüfe auf Updates...", 60);
             var updates = updater.CompareHashes(localHashes, onlineHashes);
-            lblLauncher.Text = "Lade Updates herrunter...";
-            pbLauncher.Value = 80;
-            await updater.DownloadAsync("", client, updates);
-            lblLauncher.Text = "Starte...";
-            pbLauncher.Value = 100;
+            SetUpdateText("Lade Updates herrunter...", 80);
+            await updater.DownloadAsync("http://update.p-weitkamp.de/ibbstundenplan/data", client, updates);
+            SetUpdateText("Starte Tool...", 100);
         }
     }
 }
