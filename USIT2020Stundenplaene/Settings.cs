@@ -109,7 +109,7 @@ namespace USIT2020Stundenpläne
         [JsonIgnore]
         public string Path { get; set; }
 
-        public static Settings Load(string path = "settings.json")
+        public static Settings Load(string path)
         {
             if (!File.Exists(path))
                 return new Settings { Path = path };

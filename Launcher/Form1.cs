@@ -23,7 +23,6 @@ namespace Launcher
 
         public Form1()
         {
-            Directory.SetCurrentDirectory(Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName));
             InitializeComponent();
         }
 
@@ -56,6 +55,7 @@ namespace Launcher
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            Directory.SetCurrentDirectory(Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName));
             SetUpdateText("Prüfe Lokale Datein...", 10);
             Task.Factory.StartNew(Download).ContinueWith(t =>
             {

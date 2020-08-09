@@ -249,7 +249,6 @@ namespace USIT2020Stundenpläne
 
         private void CbAutostart_CheckedChanged(object sender, EventArgs e)
         {
-#if !DEBUG
             Settings.Autostart = cbAutostart.Checked;
             if (cbAutostart.Checked)
             {
@@ -261,7 +260,6 @@ namespace USIT2020Stundenpläne
                 RegistryKey reg = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
                 reg.DeleteValue("IBB Stundenpläne", false);
             }
-#endif
         }
 
         private void CbMinimiert_CheckedChanged(object sender, EventArgs e)
