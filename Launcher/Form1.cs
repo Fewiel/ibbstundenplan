@@ -51,6 +51,7 @@ namespace Launcher
                 Path.Combine(Environment.CurrentDirectory, "core"), client, updates).ConfigureAwait(false);
             SetUpdateText("Starte Tool...", 100);
             Process.Start(Path.Combine(Environment.CurrentDirectory, "core/IBB Stundenpläne.exe"));
+            Application.Exit();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -68,15 +69,15 @@ namespace Launcher
                             MessageBoxButtons.YesNo);
                         if (mbResult == DialogResult.Yes)
                             Process.Start(path);
+                        Application.Exit();
                     }
                     else
                     {
                         MessageBox.Show("Download fehlgeschlagen, bitte versuche es später erneut." + Environment.NewLine +
                             "Solltest du Hilfe benötigen Email an: info@p-weitkamp.de");
+                        Application.Exit();
                     }
                 }
-
-                Application.Exit();
             }, TaskScheduler.FromCurrentSynchronizationContext());
         }
     }
