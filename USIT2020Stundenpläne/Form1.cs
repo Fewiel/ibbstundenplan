@@ -38,7 +38,6 @@ namespace USIT2020Stundenpläne
         private void FrmMain_Load(object sender, EventArgs e)
         {
             Directory.SetCurrentDirectory(Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName));
-            CheckforUpdates();
 
             if (!Directory.Exists(Environment.CurrentDirectory + "/Stundenpläne"))
                 Directory.CreateDirectory(Environment.CurrentDirectory + "/Stundenpläne");
@@ -66,7 +65,6 @@ namespace USIT2020Stundenpläne
             UpdateStundenpläne();
             timer1.Start();
             timer2.Start();
-            CheckforUpdates();
         }
 
         private void BtnAdd_Click(object sender, EventArgs e)
@@ -206,7 +204,6 @@ namespace USIT2020Stundenpläne
             if (Settings.Autoupdate)
             {
                 UpdateStundenpläne();
-                CheckforUpdates();
             }
         }
 
@@ -225,27 +222,6 @@ namespace USIT2020Stundenpläne
                     Settings.AddNotify(neusterStundenplan);
                 }
             }
-        }
-
-        private void CheckforUpdates()
-        {
-            client.GetAsync("http://update.p-weitkamp.de/ibbstundenplan/version.txt").ContinueWith(t =>
-            {
-                if (!t.IsCompletedSuccessfully || t.Result.StatusCode != System.Net.HttpStatusCode.OK)
-                    return;
-
-                t.Result.Content.ReadAsStringAsync().ContinueWith(c =>
-                {
-                    if (!c.IsCompletedSuccessfully)
-                        return;
-                    var v = c.Result;
-                    if (v != Version + "\n")
-                    {
-                        MessageBox.Show("IBB Stundenpläne - Update verfügbar! - " + v);
-                        btnUpdate.Visible = true;
-                    }
-                }, TaskScheduler.FromCurrentSynchronizationContext());
-            }, TaskScheduler.FromCurrentSynchronizationContext());
         }
 
         private void FrmMain_Resize(object sender, EventArgs e)
@@ -268,26 +244,6 @@ namespace USIT2020Stundenpläne
             notifyIcon1.Visible = false;
         }
 
-        private void BtnUpdate_Click(object sender, EventArgs e)
-        {
-            Process p = new Process
-            {
-                StartInfo = new ProcessStartInfo("https://3d-panther.de/?page_id=1004")
-                {
-                    UseShellExecute = true
-                }
-            };
-            p.Start();
-            Process p2 = new Process
-            {
-                StartInfo = new ProcessStartInfo(Path.Combine(Environment.CurrentDirectory + "updater.exe"))
-                {
-                    UseShellExecute = true
-                }
-            };
-            p2.Start();
-        }
-
         private void CbAutoupdate_CheckedChanged(object sender, EventArgs e)
         {
             Settings.Autoupdate = cbAutoupdate.Checked;
@@ -300,7 +256,7 @@ namespace USIT2020Stundenpläne
             if (cbAutostart.Checked)
             {
                 RegistryKey reg = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
-                reg.SetValue("IBB Stundenpläne", Path.Combine(Environment.CurrentDirectory, "IBB Stundenpläne.exe"));
+                reg.SetValue("IBB Stundenpläne", Path.Combine(Environment.CurrentDirectory, "..", "Launcher.exe"));
             }
             else
             {
@@ -318,7 +274,6 @@ namespace USIT2020Stundenpläne
         private void BtnAktualisieren_Click(object sender, EventArgs e)
         {
             UpdateStundenpläne();
-            CheckforUpdates();
         }
 
         private void CboxMinuten_SelectedIndexChanged(object sender, EventArgs e)

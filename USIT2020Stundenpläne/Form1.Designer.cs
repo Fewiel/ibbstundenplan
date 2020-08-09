@@ -40,7 +40,6 @@
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.logo3dp = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.btnUpdate = new System.Windows.Forms.Button();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.cboxMinuten = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -136,17 +135,6 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(99, 42);
             this.panel2.TabIndex = 4;
-            // 
-            // btnUpdate
-            // 
-            this.btnUpdate.Location = new System.Drawing.Point(464, 242);
-            this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(147, 30);
-            this.btnUpdate.TabIndex = 5;
-            this.btnUpdate.Text = "UPDATE VERFÜGBAR";
-            this.btnUpdate.UseVisualStyleBackColor = true;
-            this.btnUpdate.Visible = false;
-            this.btnUpdate.Click += new System.EventHandler(this.BtnUpdate_Click);
             // 
             // notifyIcon1
             // 
@@ -247,7 +235,6 @@
             this.Controls.Add(this.cbAutoupdate);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cboxMinuten);
-            this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.logo3dp);
             this.Controls.Add(this.tbAdd);
@@ -278,7 +265,6 @@
         private System.Windows.Forms.Timer timer2;
         private System.Windows.Forms.Panel logo3dp;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
         private System.Windows.Forms.ComboBox cboxMinuten;
         private System.Windows.Forms.Label label1;
