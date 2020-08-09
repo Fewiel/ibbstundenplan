@@ -40,7 +40,7 @@
             this.panel1.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.panel1.Controls.Add(this.lblLauncher);
             this.panel1.Controls.Add(this.pbLauncher);
-            this.panel1.Location = new System.Drawing.Point(89, 204);
+            this.panel1.Location = new System.Drawing.Point(88, 116);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(424, 100);
             this.panel1.TabIndex = 0;
