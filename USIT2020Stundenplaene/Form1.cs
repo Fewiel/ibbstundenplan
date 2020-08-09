@@ -25,8 +25,6 @@ namespace USIT2020Stundenpläne
     {
         public Settings Settings { get; set; }
 
-        private readonly string Version = "1.3.5";
-
         public FrmMain()
         {
             InitializeComponent();
