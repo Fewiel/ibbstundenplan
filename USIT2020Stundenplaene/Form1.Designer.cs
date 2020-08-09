@@ -121,7 +121,7 @@
             this.logo3dp.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("logo3dp.BackgroundImage")));
             this.logo3dp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.logo3dp.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.logo3dp.Location = new System.Drawing.Point(454, 292);
+            this.logo3dp.Location = new System.Drawing.Point(461, 297);
             this.logo3dp.Name = "logo3dp";
             this.logo3dp.Size = new System.Drawing.Size(52, 44);
             this.logo3dp.TabIndex = 4;
@@ -131,7 +131,7 @@
             // 
             this.panel2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel2.BackgroundImage")));
             this.panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.panel2.Location = new System.Drawing.Point(512, 292);
+            this.panel2.Location = new System.Drawing.Point(519, 297);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(99, 42);
             this.panel2.TabIndex = 4;
@@ -219,7 +219,7 @@
             this.logodiscord.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("logodiscord.BackgroundImage")));
             this.logodiscord.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.logodiscord.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.logodiscord.Location = new System.Drawing.Point(345, 292);
+            this.logodiscord.Location = new System.Drawing.Point(352, 297);
             this.logodiscord.Name = "logodiscord";
             this.logodiscord.Size = new System.Drawing.Size(103, 44);
             this.logodiscord.TabIndex = 4;
