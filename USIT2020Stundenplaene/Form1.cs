@@ -14,11 +14,11 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+//
 // Erstellt duch Phillip Weitkamp
 // Dieses Werk ist lizenziert unter einer Creative Commons Namensnennung 
 // - Nicht-kommerziell - Weitergabe unter gleichen Bedingungen 4.0 International Lizenz.
-
+//
 namespace USIT2020Stundenpläne
 {
     public partial class FrmMain : Form
