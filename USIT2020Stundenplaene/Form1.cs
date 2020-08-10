@@ -253,6 +253,9 @@ namespace USIT2020Stundenpläne
             if (cbAutostart.Checked)
             {
                 RegistryKey reg = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+                var temppath = Environment.CurrentDirectory.Replace(@"\core", "");
+                var regpath = Path.Combine(temppath, "Launcher.exe");
+
                 reg.SetValue("IBB Stundenpläne", Path.Combine(Environment.CurrentDirectory, "..", "Launcher.exe"));
             }
             else
