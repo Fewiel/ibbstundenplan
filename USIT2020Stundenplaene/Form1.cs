@@ -256,7 +256,7 @@ namespace USIT2020Stundenpläne
                 var temppath = Environment.CurrentDirectory.Replace(@"\core", "");
                 var regpath = Path.Combine(temppath, "Launcher.exe");
 
-                reg.SetValue("IBB Stundenpläne", Path.Combine(Environment.CurrentDirectory, "..", "Launcher.exe"));
+                reg.SetValue("IBB Stundenpläne", regpath);
             }
             else
             {
