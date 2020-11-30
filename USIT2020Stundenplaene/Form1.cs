@@ -185,7 +185,7 @@ namespace USIT2020Stundenpläne
                     Directory.CreateDirectory(Environment.CurrentDirectory + "/Stundenpläne");
                     try
                     {
-                        File.WriteAllBytes(Environment.CurrentDirectory + Path.Combine("/Stundenpläne", fileName), c.Result);                        
+                        File.WriteAllBytes(Environment.CurrentDirectory + Path.Combine("/Stundenpläne", fileName), c.Result);
                     }
                     catch (Exception)
                     {
@@ -353,7 +353,7 @@ namespace USIT2020Stundenpläne
         void MenuArchive_Click(object sender, EventArgs e)
         {
             if (archivepath != "")
-                Process.Start(@archivepath);
+                Process.Start("explorer.exe", archivepath);
         }
 
         private void FrmMain_MouseDown(object sender, MouseEventArgs e)
@@ -367,7 +367,7 @@ namespace USIT2020Stundenpläne
 
         private void cbArchiv_CheckedChanged(object sender, EventArgs e)
         {
-            if (cbArchiv.Checked & archivepath = "")
+            if (cbArchiv.Checked && !(Settings.Archivieren))
             {
                 FolderBrowserDialog objDialog = new FolderBrowserDialog();
                 objDialog.Description = "Stundenpläne Speichern unter...";
@@ -383,22 +383,19 @@ namespace USIT2020Stundenpläne
                 }
                 else
                 {
-                    archivepath = "";
                     Settings.ArchivPath = archivepath;
                     Settings.Archivieren = false;
                     Settings.Save();
                     cbArchiv.Checked = false;
                 }
             }
-            else
+            else if (!cbArchiv.Checked)
             {
                 archivepath = "";
                 Settings.ArchivPath = archivepath;
                 Settings.Archivieren = false;
                 Settings.Save();
             }
-
-
         }
     }
 }
