@@ -20,6 +20,7 @@ namespace Launcher
         public static readonly List<string> blf = new List<string> { "settings.json" };
         public static readonly List<string> bld = new List<string> { "Stundenpläne" };
         private static readonly HttpClient client = new HttpClient();
+        
 
         public Form1()
         {

@@ -14,6 +14,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
 //
 // Erstellt duch Phillip Weitkamp
 // Dieses Werk ist lizenziert unter einer Creative Commons Namensnennung 
@@ -24,10 +25,21 @@ namespace USIT2020Stundenpläne
     public partial class FrmMain : Form
     {
         public Settings Settings { get; set; }
+        public const int WM_NCLBUTTONDOWN = 0xA1;
+        public const int HT_CAPTION = 0x2;
+
+        [DllImportAttribute("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd,
+                         int Msg, int wParam, int lParam);
+        [DllImportAttribute("user32.dll")]
+        public static extern bool ReleaseCapture();
+        public string archivepath;
+
 
         public FrmMain()
         {
             InitializeComponent();
+            TrayMenuContext();
             Settings = Settings.Load(Path.Combine(Environment.CurrentDirectory, "settings.json"));
             if (Settings.Minimiert)
                 WindowState = FormWindowState.Minimized;
@@ -48,6 +60,8 @@ namespace USIT2020Stundenpläne
             cboxMinuten.Text = Settings.Aktualisierung.ToString();
             cbAutostart.Checked = Settings.Autostart;
             cbMinimiert.Checked = Settings.Minimiert;
+            cbArchiv.Checked = Settings.Archivieren;
+            archivepath = Settings.ArchivPath;
             var time = Convert.ToInt32(cboxMinuten.Text) * 60 * 1000;
             timer1.Interval = time;
             if (Settings.Minimiert)
@@ -64,6 +78,8 @@ namespace USIT2020Stundenpläne
             timer1.Start();
             timer2.Start();
         }
+
+
 
         private void BtnAdd_Click(object sender, EventArgs e)
         {
@@ -136,6 +152,15 @@ namespace USIT2020Stundenpläne
                     if (!c.IsCompletedSuccessfully)
                         return;
 
+                    try
+                    {
+                        if (cbArchiv.Checked)
+                            File.WriteAllBytes(Path.Combine(archivepath, fileName), c.Result);
+                    }
+                    catch (Exception)
+                    {
+                    }
+
                     if (File.Exists(Environment.CurrentDirectory + Path.Combine("/Stundenpläne", fileName)))
                     {
                         Directory.CreateDirectory(Environment.CurrentDirectory + "/tmp");
@@ -160,7 +185,7 @@ namespace USIT2020Stundenpläne
                     Directory.CreateDirectory(Environment.CurrentDirectory + "/Stundenpläne");
                     try
                     {
-                        File.WriteAllBytes(Environment.CurrentDirectory + Path.Combine("/Stundenpläne", fileName), c.Result);
+                        File.WriteAllBytes(Environment.CurrentDirectory + Path.Combine("/Stundenpläne", fileName), c.Result);                        
                     }
                     catch (Exception)
                     {
@@ -306,6 +331,74 @@ namespace USIT2020Stundenpläne
                 }
             };
             p.Start();
+        }
+
+        private void lblClose_Click(object sender, EventArgs e)
+        {
+            WindowState = FormWindowState.Minimized;
+        }
+
+        private void TrayMenuContext()
+        {
+            notifyIcon1.ContextMenuStrip = new ContextMenuStrip();
+            notifyIcon1.ContextMenuStrip.Items.Add("Archiv", null, MenuArchive_Click);
+            notifyIcon1.ContextMenuStrip.Items.Add("Exit", null, MenuExit_Click);
+        }
+
+        void MenuExit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        void MenuArchive_Click(object sender, EventArgs e)
+        {
+            if (archivepath != "")
+                Process.Start(@archivepath);
+        }
+
+        private void FrmMain_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                ReleaseCapture();
+                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            }
+        }
+
+        private void cbArchiv_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbArchiv.Checked & archivepath = "")
+            {
+                FolderBrowserDialog objDialog = new FolderBrowserDialog();
+                objDialog.Description = "Stundenpläne Speichern unter...";
+                objDialog.SelectedPath = @"C:\";
+                DialogResult objResult = objDialog.ShowDialog(this);
+                if (objResult == DialogResult.OK)
+                {
+                    archivepath = objDialog.SelectedPath;
+                    Settings.ArchivPath = archivepath;
+                    Settings.Archivieren = true;
+                    Settings.Save();
+                    MessageBox.Show("Neuer Pfad : " + objDialog.SelectedPath);
+                }
+                else
+                {
+                    archivepath = "";
+                    Settings.ArchivPath = archivepath;
+                    Settings.Archivieren = false;
+                    Settings.Save();
+                    cbArchiv.Checked = false;
+                }
+            }
+            else
+            {
+                archivepath = "";
+                Settings.ArchivPath = archivepath;
+                Settings.Archivieren = false;
+                Settings.Save();
+            }
+
+
         }
     }
 }

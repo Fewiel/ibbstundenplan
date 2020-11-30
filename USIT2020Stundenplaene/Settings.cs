@@ -14,7 +14,7 @@ namespace USIT2020Stundenpläne
 
         [JsonProperty("Autoupdate")]
         private bool _autoupdate = true;
-        
+
         [JsonProperty("Notification")]
         private bool _notification;
 
@@ -29,6 +29,12 @@ namespace USIT2020Stundenpläne
 
         [JsonProperty("Kurse")]
         private readonly List<string> _kurse = new List<string>();
+
+        [JsonProperty("Archivieren")]
+        private bool _archiv = false;
+
+        [JsonProperty("ArchivPath")]
+        private string _archivepath;
 
         [JsonIgnore]
         public IReadOnlyList<string> Kurse => _kurse;
@@ -59,6 +65,34 @@ namespace USIT2020Stundenpläne
                 if (value != _minimiert)
                 {
                     _minimiert = value;
+                    Save();
+                }
+            }
+        }
+
+        [JsonIgnore]
+        public bool Archivieren
+        {
+            get => _archiv;
+            set
+            {
+                if (value != _archiv)
+                {
+                    _archiv = value;
+                    Save();
+                }
+            }
+        }
+
+        [JsonIgnore]
+        public string ArchivPath
+        {
+            get => _archivepath;
+            set
+            {
+                if (value != _archivepath)
+                {
+                    _archivepath = value;
                     Save();
                 }
             }

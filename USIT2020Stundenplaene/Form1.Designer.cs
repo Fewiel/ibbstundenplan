@@ -48,11 +48,13 @@
             this.cbMinimiert = new System.Windows.Forms.CheckBox();
             this.btnAktualisieren = new System.Windows.Forms.Button();
             this.logodiscord = new System.Windows.Forms.Panel();
+            this.cbArchiv = new System.Windows.Forms.CheckBox();
+            this.lblClose = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(275, 213);
+            this.btnAdd.Location = new System.Drawing.Point(275, 239);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(99, 23);
             this.btnAdd.TabIndex = 1;
@@ -62,7 +64,7 @@
             // 
             // btnRemove
             // 
-            this.btnRemove.Location = new System.Drawing.Point(512, 213);
+            this.btnRemove.Location = new System.Drawing.Point(512, 239);
             this.btnRemove.Name = "btnRemove";
             this.btnRemove.Size = new System.Drawing.Size(99, 23);
             this.btnRemove.TabIndex = 1;
@@ -74,7 +76,7 @@
             // 
             this.lbSp.FormattingEnabled = true;
             this.lbSp.ItemHeight = 15;
-            this.lbSp.Location = new System.Drawing.Point(13, 13);
+            this.lbSp.Location = new System.Drawing.Point(13, 39);
             this.lbSp.Name = "lbSp";
             this.lbSp.Size = new System.Drawing.Size(598, 94);
             this.lbSp.Sorted = true;
@@ -84,14 +86,14 @@
             // 
             this.lbKurse.FormattingEnabled = true;
             this.lbKurse.ItemHeight = 15;
-            this.lbKurse.Location = new System.Drawing.Point(13, 143);
+            this.lbKurse.Location = new System.Drawing.Point(13, 169);
             this.lbKurse.Name = "lbKurse";
             this.lbKurse.Size = new System.Drawing.Size(598, 64);
             this.lbKurse.TabIndex = 2;
             // 
             // btnShow
             // 
-            this.btnShow.Location = new System.Drawing.Point(512, 113);
+            this.btnShow.Location = new System.Drawing.Point(512, 139);
             this.btnShow.Name = "btnShow";
             this.btnShow.Size = new System.Drawing.Size(99, 23);
             this.btnShow.TabIndex = 1;
@@ -101,7 +103,7 @@
             // 
             // tbAdd
             // 
-            this.tbAdd.Location = new System.Drawing.Point(13, 212);
+            this.tbAdd.Location = new System.Drawing.Point(13, 238);
             this.tbAdd.Name = "tbAdd";
             this.tbAdd.Size = new System.Drawing.Size(256, 23);
             this.tbAdd.TabIndex = 3;
@@ -118,6 +120,7 @@
             // 
             // logo3dp
             // 
+            this.logo3dp.BackColor = System.Drawing.Color.Transparent;
             this.logo3dp.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("logo3dp.BackgroundImage")));
             this.logo3dp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.logo3dp.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -129,6 +132,7 @@
             // 
             // panel2
             // 
+            this.panel2.BackColor = System.Drawing.Color.Transparent;
             this.panel2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel2.BackgroundImage")));
             this.panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.panel2.Location = new System.Drawing.Point(519, 297);
@@ -165,6 +169,8 @@
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.label1.Location = new System.Drawing.Point(62, 316);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(191, 15);
@@ -174,39 +180,45 @@
             // cbAutoupdate
             // 
             this.cbAutoupdate.AutoSize = true;
+            this.cbAutoupdate.BackColor = System.Drawing.Color.Transparent;
+            this.cbAutoupdate.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.cbAutoupdate.Location = new System.Drawing.Point(13, 292);
             this.cbAutoupdate.Name = "cbAutoupdate";
             this.cbAutoupdate.Size = new System.Drawing.Size(179, 19);
             this.cbAutoupdate.TabIndex = 8;
             this.cbAutoupdate.Text = "Automatische Aktualisierung";
-            this.cbAutoupdate.UseVisualStyleBackColor = true;
+            this.cbAutoupdate.UseVisualStyleBackColor = false;
             this.cbAutoupdate.CheckedChanged += new System.EventHandler(this.CbAutoupdate_CheckedChanged);
             // 
             // cbAutostart
             // 
             this.cbAutostart.AutoSize = true;
+            this.cbAutostart.BackColor = System.Drawing.Color.Transparent;
+            this.cbAutostart.ForeColor = System.Drawing.Color.Transparent;
             this.cbAutostart.Location = new System.Drawing.Point(12, 267);
             this.cbAutostart.Name = "cbAutostart";
             this.cbAutostart.Size = new System.Drawing.Size(75, 19);
             this.cbAutostart.TabIndex = 9;
             this.cbAutostart.Text = "Autostart";
-            this.cbAutostart.UseVisualStyleBackColor = true;
+            this.cbAutostart.UseVisualStyleBackColor = false;
             this.cbAutostart.CheckedChanged += new System.EventHandler(this.CbAutostart_CheckedChanged);
             // 
             // cbMinimiert
             // 
             this.cbMinimiert.AutoSize = true;
+            this.cbMinimiert.BackColor = System.Drawing.Color.Transparent;
+            this.cbMinimiert.ForeColor = System.Drawing.Color.Transparent;
             this.cbMinimiert.Location = new System.Drawing.Point(93, 267);
             this.cbMinimiert.Name = "cbMinimiert";
             this.cbMinimiert.Size = new System.Drawing.Size(118, 19);
             this.cbMinimiert.TabIndex = 10;
             this.cbMinimiert.Text = "Minimiert Starten";
-            this.cbMinimiert.UseVisualStyleBackColor = true;
+            this.cbMinimiert.UseVisualStyleBackColor = false;
             this.cbMinimiert.CheckedChanged += new System.EventHandler(this.CbMinimiert_CheckedChanged);
             // 
             // btnAktualisieren
             // 
-            this.btnAktualisieren.Location = new System.Drawing.Point(13, 113);
+            this.btnAktualisieren.Location = new System.Drawing.Point(13, 139);
             this.btnAktualisieren.Name = "btnAktualisieren";
             this.btnAktualisieren.Size = new System.Drawing.Size(99, 23);
             this.btnAktualisieren.TabIndex = 1;
@@ -216,6 +228,7 @@
             // 
             // logodiscord
             // 
+            this.logodiscord.BackColor = System.Drawing.Color.Transparent;
             this.logodiscord.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("logodiscord.BackgroundImage")));
             this.logodiscord.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.logodiscord.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -225,9 +238,39 @@
             this.logodiscord.TabIndex = 4;
             this.logodiscord.Click += new System.EventHandler(this.Logodiscord_Click);
             // 
+            // cbArchiv
+            // 
+            this.cbArchiv.AutoSize = true;
+            this.cbArchiv.BackColor = System.Drawing.Color.Transparent;
+            this.cbArchiv.ForeColor = System.Drawing.Color.Transparent;
+            this.cbArchiv.Location = new System.Drawing.Point(217, 267);
+            this.cbArchiv.Name = "cbArchiv";
+            this.cbArchiv.Size = new System.Drawing.Size(162, 19);
+            this.cbArchiv.TabIndex = 11;
+            this.cbArchiv.Text = "Stundenpläne Archivieren";
+            this.cbArchiv.UseVisualStyleBackColor = false;
+            this.cbArchiv.CheckedChanged += new System.EventHandler(this.cbArchiv_CheckedChanged);
+            // 
+            // lblClose
+            // 
+            this.lblClose.AutoSize = true;
+            this.lblClose.BackColor = System.Drawing.Color.Transparent;
+            this.lblClose.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblClose.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lblClose.Location = new System.Drawing.Point(581, 4);
+            this.lblClose.Name = "lblClose";
+            this.lblClose.Size = new System.Drawing.Size(30, 32);
+            this.lblClose.TabIndex = 12;
+            this.lblClose.Text = "X";
+            this.lblClose.Click += new System.EventHandler(this.lblClose_Click);
+            // 
             // FrmMain
             // 
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(623, 342);
+            this.Controls.Add(this.lblClose);
+            this.Controls.Add(this.cbArchiv);
             this.Controls.Add(this.logodiscord);
             this.Controls.Add(this.btnAktualisieren);
             this.Controls.Add(this.cbMinimiert);
@@ -243,10 +286,12 @@
             this.Controls.Add(this.lbSp);
             this.Controls.Add(this.btnRemove);
             this.Controls.Add(this.btnAdd);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmMain";
             this.Text = "IBB Stundenpläne";
             this.Load += new System.EventHandler(this.FrmMain_Load);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.FrmMain_MouseDown);
             this.Resize += new System.EventHandler(this.FrmMain_Resize);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -273,6 +318,8 @@
         private System.Windows.Forms.CheckBox cbMinimiert;
         private System.Windows.Forms.Button btnAktualisieren;
         private System.Windows.Forms.Panel logodiscord;
+        private System.Windows.Forms.CheckBox cbArchiv;
+        private System.Windows.Forms.Label lblClose;
     }
 }
 
