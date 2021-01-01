@@ -47,6 +47,14 @@ namespace USIT2020Stundenpläne
 
         private void FrmMain_Load(object sender, EventArgs e)
         {
+            DateTime dateUpdateInfo = new DateTime(2021, 1, 4);
+            if (DateTime.Now < dateUpdateInfo)
+            {
+                MessageBox.Show("Fröhliches neues Jahr! Mit dem Update habe ich einen fehler behoben welcher bei Kalenderwochen unter kw10 auftrat." +
+                    " Damit ihr die neuen Stundenpläne erhaltet, " +
+                    "bitte den Neusten Stundenplan von kw01 hinzufügen da sich das Jahr im Namen geändert hat!", "Stundenplan Tool - Happy new year! - Updateinfo! Wichtig!");  
+            }
+
             Directory.SetCurrentDirectory(Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName));
 
             if (!Directory.Exists(Environment.CurrentDirectory + "/Stundenpläne"))
@@ -115,26 +123,35 @@ namespace USIT2020Stundenpläne
             var kw2 = CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(DateTime.Now, CalendarWeekRule.FirstDay, DayOfWeek.Monday);
             var kw3 = CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(DateTime.Now.AddDays(7), CalendarWeekRule.FirstDay, DayOfWeek.Monday);
 
+            var kw0str = "" + kw0;
+            if (kw0 < 10) { kw0str = "0" + kw0; }
+            var kw1str = "" + kw1;
+            if (kw1 < 10) { kw1str = "0" + kw1; }
+            var kw2str = "" + kw2;
+            if (kw2 < 10) { kw2str = "0" + kw2; }
+            var kw3str = "" + kw3;
+            if (kw3 < 10) { kw3str = "0" + kw3; }
+
             foreach (var k in Settings.Kurse)
             {
                 var stundenplan = k.Substring(0, k.LastIndexOf("_"));
-                if (!File.Exists(Environment.CurrentDirectory + Path.Combine("/Stundenpläne", stundenplan + "_abKW" + kw0 + ".pdf")))
+                if (!File.Exists(Environment.CurrentDirectory + Path.Combine("/Stundenpläne", stundenplan + "_abKW" + kw0str + ".pdf")))
                 {
-                    var url1 = "https://us.ibb.com/umschueler/daten/" + stundenplan + "_abKW" + kw0 + ".pdf";
-                    DownloadStundenplan(url1, stundenplan + "_abKW" + kw0 + ".pdf");
+                    var url1 = "https://us.ibb.com/umschueler/daten/" + stundenplan + "_abKW" + kw0str + ".pdf";
+                    DownloadStundenplan(url1, stundenplan + "_abKW" + kw0str + ".pdf");
                 }
 
-                if (!File.Exists(Environment.CurrentDirectory + Path.Combine("/Sundenpläne", stundenplan + "_abKW" + kw1 + ".pdf")))
+                if (!File.Exists(Environment.CurrentDirectory + Path.Combine("/Sundenpläne", stundenplan + "_abKW" + kw1str + ".pdf")))
                 {
-                    var url2 = "https://us.ibb.com/umschueler/daten/" + stundenplan + "_abKW" + kw1 + ".pdf";
-                    DownloadStundenplan(url2, stundenplan + "_abKW" + kw1 + ".pdf");
+                    var url2 = "https://us.ibb.com/umschueler/daten/" + stundenplan + "_abKW" + kw1str + ".pdf";
+                    DownloadStundenplan(url2, stundenplan + "_abKW" + kw1str + ".pdf");
                 }
 
-                var url3 = "https://us.ibb.com/umschueler/daten/" + stundenplan + "_abKW" + kw2 + ".pdf";
-                var url4 = "https://us.ibb.com/umschueler/daten/" + stundenplan + "_abKW" + kw3 + ".pdf";
+                var url3 = "https://us.ibb.com/umschueler/daten/" + stundenplan + "_abKW" + kw2str + ".pdf";
+                var url4 = "https://us.ibb.com/umschueler/daten/" + stundenplan + "_abKW" + kw3str + ".pdf";
 
-                DownloadStundenplan(url3, stundenplan + "_abKW" + kw2 + ".pdf");
-                DownloadStundenplan(url4, stundenplan + "_abKW" + kw3 + ".pdf");
+                DownloadStundenplan(url3, stundenplan + "_abKW" + kw2str + ".pdf");
+                DownloadStundenplan(url4, stundenplan + "_abKW" + kw3str + ".pdf");
             }
         }
 
@@ -233,10 +250,13 @@ namespace USIT2020Stundenpläne
         private void Timer2_Tick(object sender, EventArgs e)
         {
             var kwNeu = CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(DateTime.Now.AddDays(7), CalendarWeekRule.FirstDay, DayOfWeek.Monday);
+            var kwNeuStr = "" + kwNeu;
+            if (kwNeu < 10) { kwNeuStr = "0" + kwNeu; }
+
             foreach (var k in Settings.Kurse)
             {
                 string stundenplan = k.Substring(0, k.LastIndexOf("_"));
-                string neusterStundenplan = stundenplan + "_abKW" + kwNeu + ".pdf";
+                string neusterStundenplan = stundenplan + "_abKW" + kwNeuStr + ".pdf";
                 if (File.Exists(Environment.CurrentDirectory + Path.Combine("/Stundenpläne", neusterStundenplan)) && !Settings.LetzteNotify.Contains(neusterStundenplan))
                 {
                     notifyIcon1.BalloonTipTitle = "Neuer Stundenplan verfügbar!";
