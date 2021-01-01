@@ -50,9 +50,7 @@ namespace USIT2020Stundenpläne
             DateTime dateUpdateInfo = new DateTime(2021, 1, 4);
             if (DateTime.Now < dateUpdateInfo)
             {
-                MessageBox.Show("Fröhliches neues Jahr! Mit dem Update habe ich einen fehler behoben welcher bei Kalenderwochen unter kw10 auftrat." +
-                    " Damit ihr die neuen Stundenpläne erhaltet, " +
-                    "bitte den Neusten Stundenplan von kw01 hinzufügen da sich das Jahr im Namen geändert hat!", "Stundenplan Tool - Happy new year! - Updateinfo! Wichtig!");  
+                MessageBox.Show("Fröhliches neues Jahr! Mit dem Update habe ich einen Fehler behoben welcher bei Kalenderwochen unter kw10 auftrat. Sowie das Jahr 2021 nicht korrekt gesetzt wurde. <Diese Meldung verschwindet ab dem 05.01.2021>", "Stundenplan Tool - Happy new year! - Updateinfo!");  
             }
 
             Directory.SetCurrentDirectory(Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName));
@@ -134,24 +132,24 @@ namespace USIT2020Stundenpläne
 
             foreach (var k in Settings.Kurse)
             {
-                var stundenplan = k.Substring(0, k.LastIndexOf("_"));
-                if (!File.Exists(Environment.CurrentDirectory + Path.Combine("/Stundenpläne", stundenplan + "_abKW" + kw0str + ".pdf")))
+                var stundenplan = k.Substring(0, k.LastIndexOf("_") - 4);
+                if (!File.Exists(Environment.CurrentDirectory + Path.Combine("/Stundenpläne", stundenplan + DateTime.Now.Year + "_abKW" + kw0str + ".pdf")))
                 {
-                    var url1 = "https://us.ibb.com/umschueler/daten/" + stundenplan + "_abKW" + kw0str + ".pdf";
-                    DownloadStundenplan(url1, stundenplan + "_abKW" + kw0str + ".pdf");
+                    var url1 = "https://us.ibb.com/umschueler/daten/" + stundenplan + DateTime.Now.Year + "_abKW" + kw0str + ".pdf";
+                    DownloadStundenplan(url1, stundenplan + DateTime.Now.Year + "_abKW" + kw0str + ".pdf");
                 }
 
-                if (!File.Exists(Environment.CurrentDirectory + Path.Combine("/Sundenpläne", stundenplan + "_abKW" + kw1str + ".pdf")))
+                if (!File.Exists(Environment.CurrentDirectory + Path.Combine("/Sundenpläne", stundenplan + DateTime.Now.Year + "_abKW" + kw1str + ".pdf")))
                 {
-                    var url2 = "https://us.ibb.com/umschueler/daten/" + stundenplan + "_abKW" + kw1str + ".pdf";
-                    DownloadStundenplan(url2, stundenplan + "_abKW" + kw1str + ".pdf");
+                    var url2 = "https://us.ibb.com/umschueler/daten/" + stundenplan + DateTime.Now.Year + "_abKW" + kw1str + ".pdf";
+                    DownloadStundenplan(url2, stundenplan + DateTime.Now.Year + "_abKW" + kw1str + ".pdf");
                 }
 
-                var url3 = "https://us.ibb.com/umschueler/daten/" + stundenplan + "_abKW" + kw2str + ".pdf";
-                var url4 = "https://us.ibb.com/umschueler/daten/" + stundenplan + "_abKW" + kw3str + ".pdf";
+                var url3 = "https://us.ibb.com/umschueler/daten/" + stundenplan + DateTime.Now.Year + "_abKW" + kw2str + ".pdf";
+                var url4 = "https://us.ibb.com/umschueler/daten/" + stundenplan + DateTime.Now.Year + "_abKW" + kw3str + ".pdf";
 
-                DownloadStundenplan(url3, stundenplan + "_abKW" + kw2str + ".pdf");
-                DownloadStundenplan(url4, stundenplan + "_abKW" + kw3str + ".pdf");
+                DownloadStundenplan(url3, stundenplan + DateTime.Now.Year + "_abKW" + kw2str + ".pdf");
+                DownloadStundenplan(url4, stundenplan + DateTime.Now.Year + "_abKW" + kw3str + ".pdf");
             }
         }
 
