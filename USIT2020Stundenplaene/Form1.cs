@@ -47,12 +47,6 @@ namespace USIT2020Stundenpläne
 
         private void FrmMain_Load(object sender, EventArgs e)
         {
-            DateTime dateUpdateInfo = new DateTime(2021, 1, 4);
-            if (DateTime.Now < dateUpdateInfo)
-            {
-                MessageBox.Show("Fröhliches neues Jahr! Mit dem Update habe ich einen Fehler behoben welcher bei Kalenderwochen unter kw10 auftrat. Sowie das Jahr 2021 nicht korrekt gesetzt wurde. <Diese Meldung verschwindet ab dem 05.01.2021>", "Stundenplan Tool - Happy new year! - Updateinfo!");  
-            }
-
             Directory.SetCurrentDirectory(Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName));
 
             if (!Directory.Exists(Environment.CurrentDirectory + "/Stundenpläne"))
@@ -116,10 +110,10 @@ namespace USIT2020Stundenpläne
 
         private void UpdateStundenpläne()
         {
-            var kw0 = CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(DateTime.Now.AddDays(-14), CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Sunday);
-            var kw1 = CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(DateTime.Now.AddDays(-7), CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Sunday);
+            var kw0 = CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(DateTime.Now.AddDays(-14), CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
+            var kw1 = CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(DateTime.Now.AddDays(-7), CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
             var kw2 = CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(DateTime.Now, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
-            var kw3 = CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(DateTime.Now.AddDays(7), CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Sunday);
+            var kw3 = CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(DateTime.Now.AddDays(7), CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
 
             var kw0str = "" + kw0;
             if (kw0 < 10) { kw0str = "0" + kw0; }
